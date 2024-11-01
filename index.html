@@ -11,13 +11,128 @@
             padding: 20px;
             text-align: center;
         }
+
         h1 {
             color: #333;
+        }
+
+        /* Chat window styles */
+        .chat-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+        }
+
+        .chat-header {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .chat-body {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .chat-messages {
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 150px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .chat-message {
+            margin: 5px 0;
+        }
+
+        .user-message {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .response-message {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .chat-input-container {
+            display: flex;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .send-button {
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .send-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <h1>Welcome to My Webpage!</h1>
     <p>This is a simple webpage hosted on GitHub Pages.</p>
+
+    <!-- Chat Window -->
+    <div class="chat-container">
+        <div class="chat-header">Chat with Us</div>
+        <div class="chat-body">Feel free to send us a message, and we will get back to you shortly!</div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="userInput" class="chat-input" placeholder="Type your message here..." />
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle sending a message
+        function sendMessage() {
+            // Get the input value
+            var userInput = document.getElementById('userInput').value;
+
+            // Check if input is not empty
+            if (userInput.trim() !== '') {
+                // Add the user's message to the chat window
+                var chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML += '<div class="chat-message user-message">You: ' + userInput + '</div>';
+
+                // Clear the input
+                document.getElementById('userInput').value = '';
+
+                // Respond with a fixed message
+                setTimeout(function() {
+                    chatMessages.innerHTML += '<div class="chat-message response-message">System: Thank you for your message, we will get back to you later.</div>';
+                    // Scroll to the bottom of the chat
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 500); // Simulate a slight delay
+            }
+        }
+    </script>
 </body>
 </html>
